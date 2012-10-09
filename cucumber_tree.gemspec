@@ -14,4 +14,7 @@ Gem::Specification.new do |gem|
   gem.name          = "cucumber_tree"
   gem.require_paths = ["lib"]
   gem.version       = CucumberTree::VERSION
+
+  gem.add_runtime_dependency('cucumber-rails', '>= 1.3.0')
+  gem.add_runtime_dependency('yaml_db', '>= 0.2.3')
 end
