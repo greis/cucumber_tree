@@ -10,9 +10,17 @@ module CucumberTree
       end
 
       def save(snapshot)
-        dump_dir = "#{Rails.root}/tmp/cucumber_tree/#{Time.now.to_f}"
+        dump_dir = get_dump_dir
         SerializationHelper::Base.new(YamlDb::Helper).dump_to_dir(dump_dir)
         snapshot[:dump_dir] = dump_dir
+      end
+
+      private
+
+      def get_dump_dir
+        root_path = Rails.root.join('tmp','cucumber_tree')
+        root_path.mkpath unless root_path.exist?
+        root_path.join(Time.now.to_f.to_s).to_path
       end
     end
   end
