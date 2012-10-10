@@ -12,6 +12,7 @@ if env_caller
       attr_accessor :handlers
 
       def load_snapshot(world, scenario)
+        truncate_data!
         parent_feature = scenario.feature.file.gsub(/\A(.*)\/.*(\.feature)\z/, '\1\2')
         snapshot = snapshots[parent_feature]
         set_handlers(world)
@@ -42,6 +43,10 @@ if env_caller
 
       def snapshots
         @snapshots ||= {}
+      end
+
+      def truncate_data!
+        Handler::Database.truncate!
       end
 
     end
