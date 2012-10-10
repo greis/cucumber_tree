@@ -22,6 +22,10 @@ After do |scenario|
   CucumberTree.save_snapshot(self, scenario)
 end
 
+AfterConfiguration do
+  CucumberTree.setup
+end
+
 def stub_cookies(page)
   request = ActionDispatch::Request.any_instance
   request.stub(:cookie_jar).and_return{ page.cookies }

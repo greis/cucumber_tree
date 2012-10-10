@@ -4,6 +4,7 @@ if env_caller
   require "cucumber_tree/hooks"
   require "cucumber_tree/configuration"
   require "cucumber_tree/handlers"
+  require "cucumber_tree/temp_dir"
 
   module CucumberTree
 
@@ -30,6 +31,10 @@ if env_caller
             handler.save(snapshot)
           end
         end
+      end
+
+      def setup
+        TempDir.clear!
       end
 
       private
