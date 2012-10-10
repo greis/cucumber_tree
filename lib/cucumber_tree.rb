@@ -26,9 +26,11 @@ if env_caller
 
       def save_snapshot(world, scenario)
         feature_file = scenario.feature.file
-        snapshots[feature_file] = {}.tap do |snapshot|
-          handlers.each do |handler|
-            handler.save(snapshot)
+        if is_parent_feature?(feature_file)
+          snapshots[feature_file] = {}.tap do |snapshot|
+            handlers.each do |handler|
+              handler.save(snapshot)
+            end
           end
         end
       end
@@ -38,6 +40,11 @@ if env_caller
       end
 
       private
+
+      def is_parent_feature?(file)
+        dir_name = file.gsub(/\A(.*)(\.feature)\z/, '\1')
+        File.directory?(dir_name)
+      end
 
       def set_handlers(world)
         # Handler::Url should always be the last
