@@ -1,4 +1,4 @@
-require "cucumber_tree/handler/base"
+require "cucumber_tree/handlers/base"
 require "yaml_db"
 
 module CucumberTree

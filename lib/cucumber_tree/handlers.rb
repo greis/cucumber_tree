@@ -1,4 +1,4 @@
-require "cucumber_tree/handler/database"
-require "cucumber_tree/handler/cookies"
-require "cucumber_tree/handler/variables"
-require "cucumber_tree/handler/url"
+require "cucumber_tree/handlers/database"
+require "cucumber_tree/handlers/cookies"
+require "cucumber_tree/handlers/variables"
+require "cucumber_tree/handlers/url"

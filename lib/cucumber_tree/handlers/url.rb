@@ -1,4 +1,4 @@
-require "cucumber_tree/handler/base"
+require "cucumber_tree/handlers/base"
 
 module CucumberTree
   module Handler
