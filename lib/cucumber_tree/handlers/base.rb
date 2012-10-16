@@ -2,7 +2,9 @@ module CucumberTree
   module Handler
     class Base < Struct.new(:world)
 
-      delegate :page, to: :world
+      def page
+        world.page
+      end
 
     end
   end

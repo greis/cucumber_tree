@@ -13,7 +13,7 @@ module CucumberTree
       end
 
       def save(snapshot)
-        names = world.instance_variable_names - EXCLUDED_VARIABLES
+        names = world.instance_variables.map { |var| var.to_s } - EXCLUDED_VARIABLES
         snapshot[:variables] = {}.tap do |hash|
           names.each do |name|
             hash[name] = world.instance_variable_get(name)
