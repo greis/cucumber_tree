@@ -17,6 +17,16 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency 'cucumber-rails', '>= 1.3.0'
   gem.add_runtime_dependency 'yaml_db', '>= 0.2.3'
+  gem.add_runtime_dependency 'rspec', '>= 2.9.0'
 
-  gem.add_development_dependency 'rspec', '>= 2.11.0'
+  gem.add_development_dependency 'aruba', '>= 0.5.0'
+  gem.add_development_dependency 'bundler', '>= 1.1.0'
+  gem.add_development_dependency 'rails', '>= 3.2.8'
+  gem.add_development_dependency 'sqlite3', '>= 1.3.6'
+
+  # Dependencies that Rails puts inside apps.
+  gem.add_development_dependency 'sass-rails', '>= 3.2.5'
+  gem.add_development_dependency 'coffee-rails', '>= 3.2.2'
+  gem.add_development_dependency 'uglifier', '>= 1.2.4'
+  gem.add_development_dependency 'jquery-rails', '>= 2.0.2'
 end

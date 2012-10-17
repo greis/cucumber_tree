@@ -5,8 +5,8 @@ module CucumberTree
     class Url < Base
 
       def load(snapshot)
-        puts "visiting #{snapshot[:url]}"
-        page.visit snapshot[:url]
+        url = snapshot[:url]
+        page.visit url unless url.nil?
       end
 
       def save(snapshot)

@@ -1,7 +1,9 @@
 #!/usr/bin/env rake
-require "bundler/gem_tasks"
-require 'rspec/core/rake_task'
 
-RSpec::Core::RakeTask.new(:spec)
-
-task :default => :spec
+task :default do
+  ["rspec", "cucumber"].each do |cmd|
+    puts "Starting to run #{cmd}..."
+    system(cmd)
+    raise "#{cmd} failed!" unless $?.exitstatus == 0
+  end
+end
