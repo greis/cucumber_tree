@@ -1,6 +1,6 @@
 module CucumberTree
   module Handler
-    class Base < Struct.new(:world)
+    class Base < Struct.new(:world, :scenario)
 
       def page
         world.page

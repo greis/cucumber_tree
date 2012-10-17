@@ -10,15 +10,16 @@ if env_caller
 
     class << self
 
-      attr_accessor :handlers
+      attr_accessor :handler_instances
+      attr_accessor :handler_classes
 
       def load_snapshot(world, scenario)
         truncate_data!
         parent_feature = scenario.feature.file.gsub(/\A(.*)\/.*(\.feature)\z/, '\1\2')
         snapshot = snapshots[parent_feature]
-        set_handlers(world)
+        instantiate_handlers(world, scenario)
         if snapshot.present?
-          handlers.each do |handler|
+          handler_instances.each do |handler|
             handler.load(snapshot)
           end
         end
@@ -28,7 +29,7 @@ if env_caller
         feature_file = scenario.feature.file
         if is_parent_feature?(feature_file)
           snapshots[feature_file] = {}.tap do |snapshot|
-            handlers.each do |handler|
+            handler_instances.each do |handler|
               handler.save(snapshot)
             end
           end
@@ -39,6 +40,11 @@ if env_caller
         TempDir.clear!
       end
 
+      def register_handler(*handlers)
+        self.handler_classes ||= []
+        self.handler_classes = handlers + handler_classes
+      end
+
       private
 
       def is_parent_feature?(file)
@@ -46,10 +52,9 @@ if env_caller
         File.directory?(dir_name)
       end
 
-      def set_handlers(world)
-        # Handler::Url should always be the last
-        self.handlers = [Handler::Database, Handler::Cookies, Handler::Variables, Handler::Url].map do |class_name|
-          class_name.new(world)
+      def instantiate_handlers(world, scenario)
+        self.handler_instances = handler_classes.map do |class_name|
+          class_name.new(world, scenario)
         end
       end
 
@@ -60,8 +65,11 @@ if env_caller
       def truncate_data!
         Handler::Database.truncate!
       end
-
     end
+
+    # Handler::Url should always be the last
+    register_handler(Handler::Database, Handler::Cookies, Handler::Variables, Handler::Url)
+
   end
 else
   warn "WARNING: cucumber_tree required outside of env.rb.  The rest of loading is being defered until env.rb is called.
