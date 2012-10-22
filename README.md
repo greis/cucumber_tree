@@ -1,6 +1,6 @@
 # Cucumber Tree
 
-Organize your scenarios in a tree directory and don't waste your cpu time running the same steps over and over.
+Organize your features in a tree directory and don't waste your cpu time running the same steps over and over.
 
 ## Installation
 
@@ -27,7 +27,7 @@ Change the file "features/support/env.rb" to require 'cucumber_tree'. It should 
     require 'cucumber/rails'
     require 'cucumber_tree'
 
-This gem doesn't work with database_cleaner, so remove it from your Gemfile and all the references for it inside features/support/env.rb
+This version of the gem doesn't work with database_cleaner, so remove it from your Gemfile and all the references for it inside features/support/env.rb
 
 ## Usage
 
