@@ -1,24 +1,21 @@
 require "cucumber_tree/handlers/base"
-require "yaml_db"
+require "cucumber_tree/handlers/databases/sqlite"
+require "cucumber_tree/handlers/databases/postgresql"
 
 module CucumberTree
   module Handler
-    class Database < Base
+    module Database
 
-      def load(snapshot)
-        SerializationHelper::Base.new(YamlDb::Helper).load_from_dir(snapshot[:dump_dir], false)
-      end
-
-      def save(snapshot)
-        dump_dir = ::CucumberTree::TempDir.child_path(Time.now.to_f.to_s)
-        SerializationHelper::Base.new(YamlDb::Helper).dump_to_dir(dump_dir)
-        snapshot[:dump_dir] = dump_dir
-      end
-
-      def self.truncate!
-        ActiveRecord::Base.connection.transaction do
-          SerializationHelper::Dump.tables.each do |table|
-            SerializationHelper::Load.truncate_table(table)
+      def self.get_handler
+        @get_handler ||= begin
+          adapter = Rails.configuration.database_configuration[Rails.env]["adapter"]
+          case adapter
+          when /sqlite/
+            Sqlite
+          when /postgresql/
+            Postgresql
+          else
+            raise "Database not supported: #{adapter}"
           end
         end
       end

@@ -31,3 +31,9 @@ Given /^I have created a new rails app$/ do
   rails_new
   install_cucumber_tree
 end
+
+Given /^I have created a new rails app with postgresql$/ do
+  system('createuser --superuser test_app')
+  rails_new(args: '--database=postgresql')
+  install_cucumber_tree
+end

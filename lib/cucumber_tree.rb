@@ -14,7 +14,7 @@ if env_caller
       attr_accessor :handler_classes
 
       def load_snapshot(world, scenario)
-        truncate_data!
+        clear_db!
         parent_feature = scenario.feature.file.gsub(/\A(.*)\/.*(\.feature)\z/, '\1\2')
         snapshot = snapshots[parent_feature]
         instantiate_handlers(world, scenario)
@@ -42,7 +42,7 @@ if env_caller
 
       def register_handler(*handlers)
         self.handler_classes ||= []
-        self.handler_classes = handlers + handler_classes
+        self.handler_classes += handlers
       end
 
       private
@@ -62,13 +62,13 @@ if env_caller
         @snapshots ||= {}
       end
 
-      def truncate_data!
-        Handler::Database.truncate!
+      def clear_db!
+        Handler::Database.get_handler.clear_db!
       end
     end
 
     # Handler::Url should always be the last
-    register_handler(Handler::Database, Handler::Cookies, Handler::Variables, Handler::Url)
+    register_handler(Handler::Database.get_handler, Handler::Cookies, Handler::Variables, Handler::Url)
 
   end
 else
