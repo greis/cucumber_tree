@@ -5,6 +5,8 @@ if env_caller
   require "cucumber_tree/configuration"
   require "cucumber_tree/handlers"
   require "cucumber_tree/temp_dir"
+  require "cucumber_tree/temp_dir"
+  require "cucumber_tree/database_cleaner_hook"
 
   module CucumberTree
 
@@ -14,7 +16,6 @@ if env_caller
       attr_accessor :handler_classes
 
       def load_snapshot(world, scenario)
-        clear_db!
         parent_feature = scenario.feature.file.gsub(/\A(.*)\/.*(\.feature)\z/, '\1\2')
         snapshot = snapshots[parent_feature]
         instantiate_handlers(world, scenario)
@@ -62,9 +63,6 @@ if env_caller
         @snapshots ||= {}
       end
 
-      def clear_db!
-        Handler::Database.get_handler.clear_db!
-      end
     end
 
     # Handler::Url should always be the last

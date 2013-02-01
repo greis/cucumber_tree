@@ -1,13 +1,9 @@
 require "cucumber_tree/handlers/base"
-require "cucumber_tree/handlers/databases/clear_db"
 
 module CucumberTree
   module Handler
     module Database
       class Sqlite < Base
-        extend ClearDB
-        clear_db_with :delete
-
         def load(snapshot)
           FileUtils.cp(snapshot[:sqlite_file], db_file)
         end

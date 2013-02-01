@@ -27,7 +27,7 @@ Change the file "features/support/env.rb" to require 'cucumber_tree'. It should 
     require 'cucumber/rails'
     require 'cucumber_tree'
 
-This version of the gem doesn't work with database_cleaner, so remove it from your Gemfile and all the references for it inside features/support/env.rb
+This gem depends on database_cleaner and overrides the default strategy to :truncation, so you could remove all the references to DatabaseCleaner inside features/support/env.rb
 
 ## Usage
 

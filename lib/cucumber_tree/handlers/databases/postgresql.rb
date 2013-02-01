@@ -1,13 +1,9 @@
 require "cucumber_tree/handlers/base"
-require "cucumber_tree/handlers/databases/clear_db"
 
 module CucumberTree
   module Handler
     module Database
       class Postgresql < Base
-        extend ClearDB
-        clear_db_with :truncate
-
         def load(snapshot)
           dump_file = snapshot[:postgres_file]
           options = []

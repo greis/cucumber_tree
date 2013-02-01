@@ -16,6 +16,7 @@ Gem::Specification.new do |gem|
   gem.version       = CucumberTree::VERSION
 
   gem.add_runtime_dependency 'cucumber-rails', '>= 1.3.0'
+  gem.add_runtime_dependency 'database_cleaner', '>= 0.7.2'
   gem.add_runtime_dependency 'rspec', '>= 2.9.0'
 
   gem.add_development_dependency 'aruba', '>= 0.5.0'

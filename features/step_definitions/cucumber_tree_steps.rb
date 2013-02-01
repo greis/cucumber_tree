@@ -11,7 +11,6 @@ module CucumberTreeHelper
     run_simple 'bundle exec rails generate cucumber:install'
     replace_content('config/cucumber.yml', /std_opts = "/, 'std_opts = "--require features ')
     append_to_file('features/support/env.rb', "require 'cucumber_tree'")
-    replace_content('features/support/env.rb', /DatabaseCleaner/, '#DatabaseCleaner')
   end
 
   def replace_content(file, from_content, to_content)
