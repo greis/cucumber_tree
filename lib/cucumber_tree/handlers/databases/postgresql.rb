@@ -10,7 +10,7 @@ module CucumberTree
           options << "-U #{db_config['username']}" if db_config['username'].present?
           options << "-d #{db_config['database']}"
           options << "-f #{dump_file}"
-          system("psql #{options.join(' ')}")
+          `psql #{options.join(' ')}`
         end
 
         def save(snapshot)
@@ -20,7 +20,7 @@ module CucumberTree
           options << "-U #{db_config['username']}" if db_config['username'].present?
           options << "--exclude-table=schema_migrations"
           options << "-a #{db_config['database']}"
-          system("pg_dump #{options.join(' ')}")
+          `pg_dump #{options.join(' ')}`
           snapshot[:postgres_file] = dump_file
         end
 
