@@ -18,6 +18,7 @@ module CucumberTree
           options = []
           options << "-f #{dump_file}"
           options << "-U #{db_config['username']}" if db_config['username'].present?
+          options << "--exclude-table=schema_migrations"
           options << "-a #{db_config['database']}"
           system("pg_dump #{options.join(' ')}")
           snapshot[:postgres_file] = dump_file
