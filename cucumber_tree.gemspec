@@ -4,8 +4,8 @@ require File.expand_path('../lib/cucumber_tree/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Gabriel Reis"]
   gem.email         = ["gabriel.oreis@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{Organize your features in a tree directory and don't waste your CPU time running the same steps over and over.}
+  gem.summary       = %q{Better way to organize your features}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
