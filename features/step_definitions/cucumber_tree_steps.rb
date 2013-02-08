@@ -32,7 +32,7 @@ Given /^I have created a new rails app$/ do
 end
 
 Given /^I have created a new rails app with postgresql$/ do
-  `createuser --superuser test_app`
+  `createuser --superuser test_app -U postgres`
   rails_new(args: '--database=postgresql')
   install_cucumber_tree
 end

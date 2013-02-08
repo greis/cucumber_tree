@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/greis/cucumber_tree.png)](https://travis-ci.org/greis/cucumber_tree)
+
 # Cucumber Tree
 
 Organize your features in a tree directory and don't waste your cpu time running the same steps over and over.
